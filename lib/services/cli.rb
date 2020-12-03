@@ -3,58 +3,39 @@ class CLI
     attr_reader :chord, :modf, :e2, :b, :g, :d, :a, :e, :type
     
     def call
-        puts ""
-        puts ""
+        blank_line
+        blank_line
         puts "Welcome to See Chord: the guitar chord visualizer!"
-        puts ""
+        blank_line
         puts "-----Please standby while we load your chords-----"
         Api.load_chords
-        menew_options
-        menew
+        blank_line
+        puts "* What version of a C chord were you interested in today? *"
+        menu_options
+        menu
         # list_chords
         # menu
         #check
         
     end
-
-    # def list_chords
-    #     puts "- A - B - C - D - E - F - G -"
-    #     puts "Please select the chord root that you are looking for"
-    # end
-
-    # def menu   
-    #    input = selection
-                
-    #         if  input == "a"
-    #                 puts "What version of an A chord would you like to see?"
-    #         elsif input == "b"
-    #                 puts "What version of a B chord would you like to see?"
-    #         elsif input == "c"
-    #                 puts "What version of a C chord would you like to see?"
-    #         elsif input == "d"
-    #                 puts "What version of a D chord would you like to see?"
-    #         elsif input == "e"
-    #                 puts "What version of a E chord would you like to see?"
-    #         elsif input == "f"
-    #                 puts "What version of a F chord would you like to see?"
-    #         elsif input == "g"
-    #                 puts "What version of a G chord would you like to see?"
-    #         elsif input == "exit"
-    #                 puts "See(Chord) you later!" 
-    #                 exit
-    #         else 
-    #                 puts "Sorry, we are having trouble finding that chord. Please make a new selection"
-    #                 menu
-    #         end
-    # end
-
     
     def selection
-        print "User selection:"
+        blank_line
+        print "User selection: "
         gets.chomp.downcase
     end
 
-    def menew_options
+    def blank_line
+        puts ""
+    end
+
+    def line_break
+        puts " _ _ _ _ _ _ _ _ _ _ _ _ _ "
+        puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-"
+    end
+
+    def menu_options
+        blank_line
         puts "1. Major"
         puts "2. Minor"
         puts "3. Diminished"
@@ -64,110 +45,100 @@ class CLI
         puts "7. Seventh"
         puts "8. maj7"
         puts "9. add9"
-        puts "Enter '0' to exit"
+        enter_zero
     end
 
-    def menew 
+    def enter_zero
+        puts "or enter '0' to exit"
+    end
+
+    def scroll_up(root = "")
+        blank_line
+        puts "Scroll up to see your #{root} chords!"
+        line_break
+        blank_line
+        puts "Make another selection to see more"
+        menu_options
+        blank_line
+        enter_zero
+    end
+
+    def menu 
         input = selection
 
-        if input == "1"
-            major
-            #placeholder
-        elsif input == "2"
-            minor
-            #placeholder
-        elsif input == "3"
-            dim
-            #placeholder
-        elsif input == "4"
-            aug
-            #placeholder
-        elsif input == "5"
-            sus
-            #placeholder
-        elsif input == "6"
-            sixth
-            #placeholder
-        elsif input == "7"
-            seventh
-            #placeholder
-        elsif input == "8"
-            maj7
-            #placeholder
-        elsif input == "9"
-            add9
-            #placeholder
-        elsif input == "0"
-            puts "See(Chord) you later!" 
-            exit
+        if input == "1" || input == "major" || input == "maj"
+            show_chord(chord_type("major"))
+            scroll_up("major")
+            menu
+        elsif input == "2" || input == "minor" || input == "min"
+            show_chord(chord_type("minor"))
+            scroll_up("minor")
+            menu
+        elsif input == "3" || input == "diminished" || input == "dim"
+            show_chord(chord_type("dim"))
+            scroll_up("diminished")
+            menu
+        elsif input == "4" || input == "augmented" || input == "aug"
+            show_chord(chord_type("aug"))
+            scroll_up("augmented")
+            menu
+        elsif input == "5" || input == "suspended" || input == "sus"
+            show_chord(chord_type("sus"))
+            scroll_up("suspended")
+            menu
+        elsif input == "6" || input == "sixth" || input == "six" 
+            show_chord(chord_type("6"))
+            scroll_up("6")
+            menu
+        elsif input == "7" || input == "seven" || input == "seventh" || input == "7th"
+            show_chord(chord_type("7"))
+            scroll_up("7")
+            menu
+        elsif input == "8" || input == "major 7" || input == "maj7" || input == "major seventh" || input == "maj seventh" || input == "maj 7th"
+            show_chord(chord_type("maj7"))
+            scroll_up("maj7")
+            menu
+        elsif input == "9" || input == "add9"
+            show_chord(chord_type("add9"))
+            scroll_up("add9")
+            menu
+        elsif input == "0" 
+            leave
         else 
-            puts "Sorry, we were unable to process your request. Please make another selection"
-            menew_options
+            blank_line
+            puts "-Unfortunately we were unable to process your request." 
+            sleep(2)
+            blank_line
+            puts "Please make a selction from the following menu:"
+            menu_options
+            menu
         end
     end
 
-    def major 
-        maj = Chord.all.select {|chord| chord.type == "major"}
-        maj.each do |x|
+    def leave
+        blank_line
+        sleep(1)
+        puts "See(Chord) you later!" 
+        blank_line
+        sleep(1)
+        exit
+    end
+
+    def chord_type(kind)
+        chord = Chord.all.select {|chord| chord.type == kind}
+        chord
+    end
+
+    def show_chord(y)
+        y.each do |x|
+            blank_line
             puts "#{x.chord} #{x.type}:
         e- #{x.e2} 
         b- #{x.b}
         g- #{x.g} 
         d- #{x.d} 
         a- #{x.a} 
-        E- #{x.e}      
-            
-            "
+        E- #{x.e}"
         end
     end
-
-    def minor
-        min = Chord.all.select {|chord| chord.type == "minor"}
-        min.each {|i| puts i}
-    end
-
-    def dim
-        x = Chord.all.select {|chord| chord.type == "dim"}
-        x.each {|i| puts i}
-    end
-    
-    def aug
-        x = Chord.all.select {|chord| chord.type == "aug"}
-        x.each {|i| puts i}
-    end
-
-    def sus
-        x = Chord.all.select {|chord| chord.type == "sus"}
-        x.each {|i| puts i}
-    end
-    
-    def sixth
-        x = Chord.all.select {|chord| chord.type == "6"}
-        x.each {|i| puts i}
-    end
-
-    def seventh
-        x = Chord.all.select {|chord| chord.type == "7"}
-        x.each {|i| puts i}
-    end
-
-    def maj7
-        x = Chord.all.select {|chord| chord.type == "maj7"}
-        x.each {|i| puts i}
-    end
-
-    def add9
-        x = Chord.all.select {|chord| chord.type == "add9"}
-        x.each {|i| puts i}
-    end
-    
-    
-    
-    
-    
-
-    # def check
-    #     puts Chord.all
-    # end
-    
 end
