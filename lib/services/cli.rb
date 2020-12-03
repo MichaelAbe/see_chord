@@ -1,4 +1,6 @@
 class CLI
+
+    attr_reader :chord, :modf, :e2, :b, :g, :d, :a, :e, :type
     
     def call
         puts ""
@@ -70,31 +72,31 @@ class CLI
 
         if input == "1"
             major
-            menew_options
+            #placeholder
         elsif input == "2"
             minor
-            menew_options
+            #placeholder
         elsif input == "3"
             dim
-            menew_options
+            #placeholder
         elsif input == "4"
             aug
-            menew_options
+            #placeholder
         elsif input == "5"
             sus
-            menew_options
+            #placeholder
         elsif input == "6"
             sixth
-            menew_options
+            #placeholder
         elsif input == "7"
             seventh
-            menew_options
+            #placeholder
         elsif input == "8"
             maj7
-            menew_options
+            #placeholder
         elsif input == "9"
             add9
-            menew_options
+            #placeholder
         elsif input == "0"
             puts "See(Chord) you later!" 
             exit
@@ -106,7 +108,17 @@ class CLI
 
     def major 
         maj = Chord.all.select {|chord| chord.type == "major"}
-        maj.each {|i| puts i}
+        maj.each do |x|
+            puts "#{x.chord} #{x.type}:
+        e- #{x.e2} 
+        b- #{x.b}
+        g- #{x.g} 
+        d- #{x.d} 
+        a- #{x.a} 
+        E- #{x.e}      
+            
+            "
+        end
     end
 
     def minor

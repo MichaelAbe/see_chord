@@ -3,15 +3,15 @@ class Chord
 
     @@all = []
    
-    def initialize(data)
-        @chord = data["chord"]
-        self.type = data["modf"]
-        @e2 = data["e2"]
-        @b = data["b"]
-        @g = data["g"]
-        @d = data["d"]
-        @a = data["a"]
-        @e = data["e"]
+    def initialize(water)
+        @chord = water["chord"]
+        @type = water["modf"]
+        @e2 = water["e2"]
+        @b = water["b"]
+        @g = water["g"]
+        @d = water["d"]
+        @a = water["a"]
+        @e = water["e"]
         #binding.pry
         @@all << self
     end

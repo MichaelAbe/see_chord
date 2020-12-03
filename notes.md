@@ -13,3 +13,7 @@ Classes
     -CLI
     -API
     -maybe Chord_Variant
+
+
+maj = chords.select{|chord| chord[:modf] == "major"}
+maj.each{|chord| puts chord}
