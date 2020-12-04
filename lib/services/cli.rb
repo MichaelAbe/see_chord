@@ -98,7 +98,7 @@ class CLI
             show_chord(chord_type("maj7"))
             scroll_up("maj7")
             menu
-        elsif input == "9" || input == "add9"
+        elsif input == "9" || input == "add9" || input == "add 9"
             show_chord(chord_type("add9"))
             scroll_up("add9")
             menu
