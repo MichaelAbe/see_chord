@@ -1,10 +1,7 @@
 # SeeChord
 
 See Chord: The Guitar Chord Visualizer!
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/see_chord`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+    This CLI application shows you variants of that root "C" chord for the guitar 
 
 ## Installation
 
@@ -24,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+bin/run
 
 ## Development
 
