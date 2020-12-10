@@ -63,13 +63,20 @@ class CLI
         enter_zero
     end
 
+    def chord_variation(type)
+        show_chord(chord_type(type))
+        scroll_up(type)
+        menu
+    end
+
     def menu 
         input = selection
 
         if input == "1" || input == "major" || input == "maj"
-            show_chord(chord_type("major"))
-            scroll_up("major")
-            menu
+            # show_chord(chord_type("major"))
+            # scroll_up("major")
+            # menu
+            chord_variation("major")
         elsif input == "2" || input == "minor" || input == "min"
             show_chord(chord_type("minor"))
             scroll_up("minor")
